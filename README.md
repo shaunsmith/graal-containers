@@ -1,6 +1,8 @@
 # graal-containers
 
-## Intro
+## Introduction
+
+***Credits: @krisfoster https://github.com/krisfoster/graal-containers***
 
 This repo will walk you through building containerised apps with GraalVM JDK and Native Image.
 
