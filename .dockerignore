@@ -1,5 +1,6 @@
-# Ignore the Dockerfiles, prometheus, target folders
+# Ignore the Dockerfiles, images, prometheus, target folders (except the jibber native executable)
 Dockerfiles
+images
 prometheus
 target
 !target/jibber
