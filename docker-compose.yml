@@ -7,141 +7,160 @@ volumes:
 services:
 
   # Apps
-  jibber-jdk:
-    image: localhost/jibber:jdk.0.1
+  jibber-gvmee-jdk17:
+    image: localhost/jibber:gvmee-jdk17-0.0.1
 #    restart: always
     mem_limit: 256m
     memswap_limit: 256m
     cpu_count: 4
     cpu_percent: 100
     cpus: 4
-    container_name: jibber-jdk
+    container_name: jibber-gvmee-jdk17
     command:
       - "-jar"
       - "app.jar"
       - '-Xms64m'
       - '-Xmx64m'
-    depends_on:
-      - "prom"
+    # depends_on:
+    #   - "prom"
     ports:
-      - "8081:8080"
-  jibber-nibase:
-    image: localhost/jibber:native.0.1
-#    restart: 
-    mem_limit: 128m
-    memswap_limit: 128m
-    cpu_count: 4
-    cpu_percent: 100
-    cpus: 4
-    container_name: jibber-nibase
-    command:
-      - '-Xms64m'
-      - '-Xmx64m'
-    depends_on:
-      - "prom"
-    ports:
-      - "8082:8080"
-  jibber-nig1:
-    image: localhost/jibber:nativeg1.0.1
-#    restart: never
-    mem_limit: 128m
-    memswap_limit: 128m
-    cpu_count: 4
-    cpu_percent: 100
-    cpus: 4
-    container_name: jibber-nig1
-    command:
-      - '-Xms64m'
-      - '-Xmx64m'
-    depends_on:
-      - "prom"
-    ports:
-      - "8083:8080"
-  jibber-nidistroless:
-    image: localhost/jibber:distroless.0.1
-#    restart: never
-    mem_limit: 128m
-    memswap_limit: 128m
-    cpu_count: 4
-    cpu_percent: 100
-    cpus: 4
-    container_name: jibber-nidistroless
-    command:
-      - '-Xms64m'
-      - '-Xmx64m'
-    depends_on:
-      - "prom"
-    ports:
-      - "8084:8080"
-  jibber-jlink:
-    image: localhost/jibber:jlink.0.1
-#    restart: always
-    mem_limit: 256m
-    memswap_limit: 256m
-    cpu_count: 4
-    cpu_percent: 100
-    cpus: 4
-    container_name: jibber-jlink
-    command:
-      - "-jar"
-      - "app.jar"
-      - '-Xms64m'
-      - '-Xmx64m'
-    depends_on:
-      - "prom"
-    ports:
-      - "8085:8080"
-  jibber-pgo:
-    image: localhost/jibber:pgo.0.1
-#    restart: never
-    mem_limit: 128m
-    memswap_limit: 128m
-    cpu_count: 4
-    cpu_percent: 100
-    cpus: 4
-    container_name: jibber-pgo
-    command:
-      - '-Xms64m'
-      - '-Xmx64m'
-    depends_on:
-      - "prom"
-    ports:
-      - "8086:8080"
+      - "8080:8080"
+#   jibber-jdk:
+#     image: localhost/jibber:jdk.0.1
+# #    restart: always
+#     mem_limit: 256m
+#     memswap_limit: 256m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-jdk
+#     command:
+#       - "-jar"
+#       - "app.jar"
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     depends_on:
+#       - "prom"
+#     ports:
+#       - "8081:8080"
+#   jibber-nibase:
+#     # image: localhost/jibber:native.0.0.1
+#     image: localhost/jibber:gvmee-native.0.0.1
+# #    restart: 
+#     mem_limit: 128m
+#     memswap_limit: 128m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-nibase
+#     command:
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     # depends_on:
+#     #   - "prom"
+#     ports:
+#       - "8082:8080"
+#   jibber-nig1:
+#     image: localhost/jibber:nativeg1.0.1
+# #    restart: never
+#     mem_limit: 128m
+#     memswap_limit: 128m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-nig1
+#     command:
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     depends_on:
+#       - "prom"
+#     ports:
+#       - "8083:8080"
+#   jibber-nidistroless:
+#     image: localhost/jibber:distroless.0.1
+# #    restart: never
+#     mem_limit: 128m
+#     memswap_limit: 128m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-nidistroless
+#     command:
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     depends_on:
+#       - "prom"
+#     ports:
+#       - "8084:8080"
+#   jibber-jlink:
+#     image: localhost/jibber:jlink.0.1
+# #    restart: always
+#     mem_limit: 256m
+#     memswap_limit: 256m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-jlink
+#     command:
+#       - "-jar"
+#       - "app.jar"
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     depends_on:
+#       - "prom"
+#     ports:
+#       - "8085:8080"
+#   jibber-pgo:
+#     image: localhost/jibber:pgo.0.1
+# #    restart: never
+#     mem_limit: 128m
+#     memswap_limit: 128m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-pgo
+#     command:
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     depends_on:
+#       - "prom"
+#     ports:
+#       - "8086:8080"
 
   # Reporting & Metrics
 
   ## Prometheus
-  prom:
-    image: prom/prometheus
-    container_name: prometheus
-    volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--web.enable-lifecycle'
-      - '--web.enable-admin-api'
-    ports:
-      - "9090:9090"
+  # prom:
+  #   image: prom/prometheus
+  #   container_name: prometheus
+  #   volumes:
+  #     - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #     - '--storage.tsdb.path=/prometheus'
+  #     - '--web.console.libraries=/etc/prometheus/console_libraries'
+  #     - '--web.console.templates=/etc/prometheus/consoles'
+  #     - '--web.enable-lifecycle'
+  #     - '--web.enable-admin-api'
+  #   ports:
+  #     - "9090:9090"
 
   ## CAdvisor
-  cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.42.0
-    container_name: cadvisor
-    privileged: true
-    devices:
-      - /dev/kmsg:/dev/kmsg
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker:/var/lib/docker:ro
-      - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
-    restart: unless-stopped
-    ports:
-      - 9099:8080
+  # cadvisor:
+  #   image: gcr.io/cadvisor/cadvisor:v0.42.0
+  #   container_name: cadvisor
+  #   privileged: true
+  #   devices:
+  #     - /dev/kmsg:/dev/kmsg
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:ro
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker:/var/lib/docker:ro
+  #     - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+  #   restart: unless-stopped
+  #   ports:
+  #     - 9099:8080
 
 
 
