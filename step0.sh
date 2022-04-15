@@ -2,20 +2,15 @@
 
 REPO=localhost
 APP=jibber
-TYPE=jdk
-VER=0.1
-CONTAINER=${REPO}/${APP}:${TYPE}.${VER}
-JAR_FILE=demo-0.0.1-SNAPSHOT-exec.jar
+TYPE=gvmee-jdk17
+VER=0.0.1
+TAG=${REPO}/${APP}:${TYPE}-${VER}
+JAR_FILE=${APP}-${VER}-SNAPSHOT-exec.jar
 
-echo "Container : ${CONTAINER}"
-
-echo "Building Java..."
-mvn package -DskipTests
-echo "DONE"
-
-echo "Dockerizing our app.."
+echo "Tag : ${TAG}"
+echo "Running multistage build to build the JAR and dockerize our app JAR."
 docker login container-registry.oracle.com
-docker build -f ./Dockerfiles/Dockerfile.jdk \
+docker build -f ./Dockerfiles/multistage/Dockerfile.gvmee-jar \
              --build-arg JAR_FILE=${JAR_FILE} \
-             -t ${CONTAINER} .
+             -t ${TAG} .
 echo "DONE"
