@@ -1,0 +1,23 @@
+# Ignore the Dockerfiles, prometheus, target folders
+Dockerfiles
+prometheus
+target
+!target/jibber
+
+#Ignoring git, mvn, cache folders
+.git
+.mvn
+.cache
+**/.DS_Store
+
+#Ignoring the .dockerignore, .gitignore and LICENSE files
+.dockerignore
+.gitignore
+LICENSE
+
+#Ignoring all the markdown, shell scripts, yml and class files
+*.md
+*.sh
+*.cmd
+*.yml
+**/*.class
