@@ -1,0 +1,54 @@
+#
+# This is a multistange Docker build where we use:
+# 1) GraalVM Enterprise 21.3 JDK 17 as the base build image to build the app JAR, and
+# 2) GraalVM Enterprise 21.3 JDK 17 as the base runtime image to ship the app JAR
+#
+
+#
+# First Stage - Build stage: Build the application JAR file
+#
+FROM container-registry.oracle.com/graalvm/jdk-ee:java17-21.3 AS builder
+
+# Install tar and gzip to extract the Maven binaries
+RUN microdnf install tar gzip
+
+# Install Maven
+# Source: 
+# 1) https://github.com/carlossg/docker-maven/blob/925e49a1d0986070208e3c06a11c41f8f2cada82/openjdk-17/Dockerfile
+# 2) https://maven.apache.org/download.cgi
+ARG USER_HOME_DIR="/root"
+ARG SHA=89ab8ece99292476447ef6a6800d9842bbb60787b9b8a45c103aa61d2f205a971d8c3ddfb8b03e514455b4173602bd015e82958c0b3ddc1728a57126f773c743
+ARG MAVEN_DOWNLOAD_URL=https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
+
+RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
+  && curl -fsSL -o /tmp/apache-maven.tar.gz ${MAVEN_DOWNLOAD_URL} \
+  && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
+  && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
+  && rm -f /tmp/apache-maven.tar.gz \
+  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+
+ENV MAVEN_HOME /usr/share/maven
+ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+
+# Set the working directory to /home/app
+WORKDIR /home/app
+
+# Copy the source code and pom.xml in this directory
+# COPY . /home/app # As we have a .dockerignore file, we can also use this command
+COPY src src
+COPY pom.xml pom.xml
+
+# Run maven package in this directory to build the application JAR file
+RUN mvn clean package -DskipTests
+
+#
+# Final stage: Create a runtime image
+#
+FROM container-registry.oracle.com/graalvm/jdk-ee:java17-21.3 AS runtime
+
+ARG JAR_FILE
+EXPOSE 8080
+WORKDIR /home/app
+COPY --from=builder /home/app/target/${JAR_FILE} app.jar
+ENTRYPOINT ["java"]
+CMD ["-jar","app.jar"]
