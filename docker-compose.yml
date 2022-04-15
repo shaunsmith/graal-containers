@@ -7,24 +7,24 @@ volumes:
 services:
 
   # Apps
-  jibber-gvmee-jdk17:
-    image: localhost/jibber:gvmee-jdk17-0.0.1
-#    restart: always
-    mem_limit: 256m
-    memswap_limit: 256m
-    cpu_count: 4
-    cpu_percent: 100
-    cpus: 4
-    container_name: jibber-gvmee-jdk17
-    command:
-      - "-jar"
-      - "app.jar"
-      - '-Xms64m'
-      - '-Xmx64m'
-    # depends_on:
-    #   - "prom"
-    ports:
-      - "8080:8080"
+#   jibber-gvmee-jdk17:
+#     image: localhost/jibber:gvmee-jdk17-0.0.1
+# #    restart: always
+#     mem_limit: 256m
+#     memswap_limit: 256m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-gvmee-jdk17
+#     command:
+#       - "-jar"
+#       - "app.jar"
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     # depends_on:
+#     #   - "prom"
+#     ports:
+#       - "8080:8080"
 #   jibber-jdk:
 #     image: localhost/jibber:jdk.0.1
 # #    restart: always
@@ -43,23 +43,23 @@ services:
 #       - "prom"
 #     ports:
 #       - "8081:8080"
-#   jibber-nibase:
-#     # image: localhost/jibber:native.0.0.1
-#     image: localhost/jibber:gvmee-native.0.0.1
-# #    restart: 
-#     mem_limit: 128m
-#     memswap_limit: 128m
-#     cpu_count: 4
-#     cpu_percent: 100
-#     cpus: 4
-#     container_name: jibber-nibase
-#     command:
-#       - '-Xms64m'
-#       - '-Xmx64m'
-#     # depends_on:
-#     #   - "prom"
-#     ports:
-#       - "8082:8080"
+  jibber-nibase:
+    # image: localhost/jibber:native.0.0.1
+    image: localhost/jibber:gvmee-native.0.0.1
+#    restart: 
+    mem_limit: 128m
+    memswap_limit: 128m
+    cpu_count: 4
+    cpu_percent: 100
+    cpus: 4
+    container_name: jibber-nibase
+    command:
+      - '-Xms64m'
+      - '-Xmx64m'
+    # depends_on:
+    #   - "prom"
+    ports:
+      - "8082:8080"
 #   jibber-nig1:
 #     image: localhost/jibber:nativeg1.0.1
 # #    restart: never

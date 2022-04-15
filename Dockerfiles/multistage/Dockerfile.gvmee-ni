@@ -52,4 +52,4 @@ EXPOSE 8080
 WORKDIR /home/app
 
 COPY --from=builder /home/app/target/${APP_FILE} app
-ENTRYPOINT ["/app"]
+ENTRYPOINT ["./app"]
