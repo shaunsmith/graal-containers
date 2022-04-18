@@ -1,8 +1,10 @@
 #
 # This is a multistange Docker build where we use:
-# 1) GraalVM Enterprise 21.3 Native Image (contains JDK 17) as the base build image to build the app JAR
-# 2) GraalVM Enterprise 21.3 Native Image (contains JDK 17) as the base image to generate the app native executable, and
-# 3) Oracle Linux 8-slim as the base runtime image to ship the app native executable
+# - GraalVM Enterprise 21.3 Native Image Java 17 as the base build image to 
+#    - build the app JAR
+#    - generate the app native executable
+# - Oracle Linux 8-slim as the base runtime image to 
+#    - ship the app native executable
 #
 
 #
