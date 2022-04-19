@@ -9,7 +9,7 @@ env:
     # APP: "jibber"
     # TYPE: "gvmee-jdk17"
     # VER: "0.0.1"
-    TAG: "jibber-gvmee2130-jdk17:0.0.1" # ${REPO}/${APP}:${TYPE}-${VER}
+    TAG: "jibber-jar-gvmee2130-jdk17:0.0.1" # ${REPO}/${APP}:${TYPE}-${VER}
     JAR_FILE: "jibber-SNAPSHOT-exec.jar" # ${APP}-${VER}-SNAPSHOT-exec.jar
 
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
@@ -57,7 +57,7 @@ steps:
           build_result=FAILURE
           echo "Failure successfully handled"
 outputArtifacts:
-  - name: Build_output_function_image
+  - name: Build_output_image
     type: DOCKER_IMAGE
     # this is only the locally exported container image name
     # this location tag doesn't effect the tag used to deliver the container image
