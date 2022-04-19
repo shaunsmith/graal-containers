@@ -10,7 +10,7 @@ env:
     # TYPE: "gvmee-jdk17"
     # VER: "0.0.1"
     TAG: "jibber-jar-gvmee2130-jdk17:0.0.1" # ${REPO}/${APP}:${TYPE}-${VER}
-    JAR_FILE: "jibber-SNAPSHOT-exec.jar" # ${APP}-${VER}-SNAPSHOT-exec.jar
+    JAR_FILE: "jibber-0.0.1-SNAPSHOT-exec.jar" # Must match the value in pom.xml
 
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
   # you can then access the value of that secret in your build_spec.yaml commands
