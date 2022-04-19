@@ -141,4 +141,12 @@ docker system prune -a
 6. Add artifact. `phx.ocir.io/<tenancy-namespace>/<repo-prefix>/jibber-jar-gvmee2130-jdk17:${BUILDRUN_HASH}`
 7. Add a `Stage >> Deliver artificats` after the Managed Build stage.
 8. Go to OCIR and create an empty Private Repository named `<repo-prefix>/jibber-jar-gvmee2130-jdk17` in your compartment.
-9. Test the build pipeline again by clicking the `Start manual run` button. 
+9. Test the build pipeline again by clicking the `Start manual run` button. The image should be pushed to the OCIR repo. 
+10. To test the image on local, 
+    - Mark the OCIR repo as public. 
+    - Docker pull the new image (with the new tag) on local. 
+    - Update the image tag in the docker-compose.yml file for the `jibber-gvmee-jdk17` service. 
+    - Run `docker-compose up --remove-orphans` to start the application on port 8080.
+    - Run `docker ps -a` to check status of the running container.
+    - Go to http://localhost:8080/jibber in a browser and you should see a nonsense verse.
+    - Run `docker-compose stop` in another terminal window to start the application
