@@ -1,0 +1,64 @@
+version: 0.1
+component: build
+timeoutInSeconds: 1000
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    REPO: "localhost"
+    APP: "jibber"
+    TYPE: "gvmee-jdk17"
+    VER: "0.0.1"
+    TAG: "localhost/jibber:gvmee-jdk17-0.0.1" # ${REPO}/${APP}:${TYPE}-${VER}
+    JAR_FILE: "jibber-0.0.1-SNAPSHOT-exec.jar" # ${APP}-${VER}-SNAPSHOT-exec.jar
+
+  # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
+  # you can then access the value of that secret in your build_spec.yaml commands
+  vaultVariables:
+    REGISTRY_USER: "ocid1.vaultsecret.oc1.phx.amaaaaaacrsaiiiakusyuuzlutwvxam2yxkfeaovibnya4ze2w6ck2nwqelq"
+    REGISTRY_PASS: "ocid1.vaultsecret.oc1.phx.amaaaaaacrsaiiiabpyc5irykfrlaslc2scpovtksye5ftbw6zkf6z7knkqq"
+
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    - BUILDRUN_HASH
+
+steps:
+  - type: Command
+    name: "Define unique image tag"
+    timeoutInSeconds: 140
+    command: |
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+  - type: Command
+    name: "Java version"
+    command: |
+      echo "JAVA VERSION: $(java --version)"
+      echo "JAVA HOME: $JAVA_HOME"
+      echo "Current dir: $(pwd)"
+      echo "Current dir contents: $(ls -alh)"
+      echo "Tag : ${TAG}"
+  - type: Command
+    name: "Docker build"
+    command: |
+      echo "Running multistage build to build the JAR and dockerize our app JAR."
+      echo "REGISTRY_NAME: " ${REGISTRY_NAME}
+      docker login ${REGISTRY_NAME} -u ${REGISTRY_USER} -p ${REGISTRY_PASS}
+      docker build -f ./Dockerfiles/multistage/Dockerfile.gvmee-jar \
+                  --build-arg JAR_FILE=${JAR_FILE} \
+                  -t ${TAG} .
+      echo "DONE"
+      printf "List of docker images:\n $(docker images)"  
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          build_result=FAILURE
+          echo "Failure successfully handled"
+outputArtifacts:
+  - name: Build_output_function_image
+    type: DOCKER_IMAGE
+    # this is only the locally exported container image name
+    # this location tag doesn't effect the tag used to deliver the container image
+    # to the Container Registry.
+    location: ${TAG}
