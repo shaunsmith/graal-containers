@@ -37,7 +37,7 @@ A Docker Compose has ben provided that will start the container, plus cAdvisor a
 
 The other tools - cAdvisor and Prometheus - will allow us to generate pretty graphs of the RSS (Resident Set Size) for the application running in the container.
 
-With the `jibber-gvmee-jdk17:` section uncommented, run the following command to run the app JAR.
+With the `jibber-jar-gvmee-jdk17:` section uncommented, run the following command to run the app JAR.
 
 ```bash
 docker-compose up -d
@@ -91,7 +91,7 @@ Exit status 137 indicates an out of memory error. Try increasing the memory for 
 
 ### Run the App Native Executable
 
-Comment the `jibber-gvmee-jdk17:` section. Uncomment the `jibber-nibase` section and run the following command to run the app native executable.
+Comment the `jibber-jar-gvmee-jdk17:` section. Uncomment the `jibber-nibase` section and run the following command to run the app native executable.
 
 ```bash
 docker-compose up -d
@@ -131,7 +131,7 @@ Docker provides a single command that will clean up any resources — images, co
 docker system prune -a
 ```
 
-## Use OCI DevOps to build the app JAR
+## Use OCI DevOps to build the app JAR (step0)
 
 1. Mirror the GitHub repo `DevOps Project >> Code repositories >> Mirror repository`.
 2. Each time you make a change to the GitHub repo, synchornize the changes in the OCI. `DevOps Project >> Code repositories >> github_graal-containers >> Synchronize now`.
@@ -145,7 +145,28 @@ docker system prune -a
 10. To test the image on local, 
     - Mark the OCIR repo as public. 
     - Docker pull the new image (with the new tag) on local. 
-    - Update the image tag in the docker-compose.yml file for the `jibber-gvmee-jdk17` service. 
+    - Update the image tag in the docker-compose.yml file for the `jibber-jar-gvmee-jdk17` service. 
+    - Run `docker-compose up --remove-orphans` to start the application on port 8080.
+    - Run `docker ps -a` to check status of the running container.
+    - Go to http://localhost:8080/jibber in a browser and you should see a nonsense verse.
+    - Run `docker-compose stop` in another terminal window to start the application
+
+
+## Use OCI DevOps to build the app native executable (step1)
+
+1. If you haven't already mirrored your GitHub repo, mirror the GitHub repo `DevOps Project >> Code repositories >> Mirror repository`.
+2. Each time you make a change to the GitHub repo, synchornize the changes in the OCI. `DevOps Project >> Code repositories >> github_graal-containers >> Synchronize now`.
+3. Create a `Build pipeline`.
+4. Add a `Stage >> Managed Build` to the build pipeline.
+5. Test the build pipeline by clicking the `Start manual run` button.
+6. Add artifact. `phx.ocir.io/<tenancy-namespace>/<repo-prefix>/jibber-ni-gvmee2130-jdk17:${BUILDRUN_HASH}`
+7. Add a `Stage >> Deliver artificats` after the Managed Build stage.
+8. Go to OCIR and create an empty Private Repository named `<repo-prefix>/jibber-ni-gvmee2130-jdk17` in your compartment.
+9. Test the build pipeline again by clicking the `Start manual run` button. The image should be pushed to the OCIR repo. 
+10. To test the image on local, 
+    - Mark the OCIR repo as public. 
+    - Docker pull the new image (with the new tag) on local. 
+    - Update the image tag in the docker-compose.yml file for the `jibber-ni-gvmee-jdk17` service. 
     - Run `docker-compose up --remove-orphans` to start the application on port 8080.
     - Run `docker ps -a` to check status of the running container.
     - Go to http://localhost:8080/jibber in a browser and you should see a nonsense verse.
