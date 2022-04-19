@@ -130,3 +130,8 @@ Docker provides a single command that will clean up any resources — images, co
 ```bash
 docker system prune -a
 ```
+
+## Use OCI DevOps to build the app JAR
+
+1. Mirror the GitHub repo `DevOps Project >> Code repositories >> Mirror repository`
+2. 
