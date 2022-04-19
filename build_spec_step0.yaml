@@ -5,12 +5,12 @@ shell: bash
 env:
   # these are local variables to the build config
   variables:
-    REPO: "localhost"
-    APP: "jibber"
-    TYPE: "gvmee-jdk17"
-    VER: "0.0.1"
-    TAG: "localhost/jibber:gvmee-jdk17-0.0.1" # ${REPO}/${APP}:${TYPE}-${VER}
-    JAR_FILE: "jibber-0.0.1-SNAPSHOT-exec.jar" # ${APP}-${VER}-SNAPSHOT-exec.jar
+    # REPO: "localhost"
+    # APP: "jibber"
+    # TYPE: "gvmee-jdk17"
+    # VER: "0.0.1"
+    TAG: "jibber-gvmee2130-jdk17:0.0.1" # ${REPO}/${APP}:${TYPE}-${VER}
+    JAR_FILE: "jibber-SNAPSHOT-exec.jar" # ${APP}-${VER}-SNAPSHOT-exec.jar
 
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
   # you can then access the value of that secret in your build_spec.yaml commands
@@ -28,12 +28,13 @@ steps:
     name: "Define unique image tag"
     timeoutInSeconds: 140
     command: |
+      echo "OCI_BUILD_RUN_ID: ${OCI_BUILD_RUN_ID}"
       export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
       echo "BUILDRUN_HASH: " $BUILDRUN_HASH
   - type: Command
     name: "Java version"
     command: |
-      echo "JAVA VERSION: $(java --version)"
+      echo "JAVA VERSION: $(java -version)"
       echo "JAVA HOME: $JAVA_HOME"
       echo "Current dir: $(pwd)"
       echo "Current dir contents: $(ls -alh)"

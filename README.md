@@ -133,5 +133,11 @@ docker system prune -a
 
 ## Use OCI DevOps to build the app JAR
 
-1. Mirror the GitHub repo `DevOps Project >> Code repositories >> Mirror repository`
-2. 
+1. Mirror the GitHub repo `DevOps Project >> Code repositories >> Mirror repository`.
+2. Each time you make a change to the GitHub repo, synchornize the changes in the OCI. `DevOps Project >> Code repositories >> github_graal-containers >> Synchronize now`.
+3. Create a `Build pipeline`.
+4. Add a `Stage >> Managed Build` to the build pipeline.
+5. Test the build pipeline by clicking the `Start manual run` button.
+6. Add artifact. `localhost/jibber:gvmee-jdk17-0.0.1`
+7. Add a `Stage >> Deliver artificats` after the Managed Build stage.
+8. 
