@@ -227,9 +227,9 @@ docker system prune -a
 
 12. To test the image on local, 
     - Mark the OCIR repo as public. 
-    - Docker pull the new image (with the new tag) on local. 
+    - Optionally, docker pull the new image (with the new tag) on local. 
     - Update the image tag in the docker-compose.yml file for the `jibber-ni-gvmee-jdk17` service. 
     - Run `docker-compose up --remove-orphans` to start the application on port 8080.
     - Run `docker ps -a` to check status of the running container.
-    - Go to http://localhost:8080/jibber in a browser and you should see a nonsense verse.
+    - Go to http://localhost:8082/jibber in a browser and you should see a nonsense verse.
     - Run `docker-compose stop` in another terminal window to start the application
