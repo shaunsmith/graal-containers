@@ -138,6 +138,7 @@ docker system prune -a
 3. Create a `Build pipeline`.
 4. Add a `Stage >> Managed Build` to the build pipeline.
 5. Test the build pipeline by clicking the `Start manual run` button.
-6. Add artifact. `localhost/jibber:gvmee-jdk17-0.0.1`
+6. Add artifact. `phx.ocir.io/<tenancy-namespace>/<repo-prefix>/jibber-jar-gvmee2130-jdk17:${BUILDRUN_HASH}`
 7. Add a `Stage >> Deliver artificats` after the Managed Build stage.
-8. 
+8. Go to OCIR and create an empty Private Repository named `<repo-prefix>/jibber-jar-gvmee2130-jdk17` in your compartment.
+9. Test the build pipeline again by clicking the `Start manual run` button. 
