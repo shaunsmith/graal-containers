@@ -32,19 +32,21 @@ steps:
       export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
       echo "BUILDRUN_HASH: " $BUILDRUN_HASH
   - type: Command
-    name: "Java version"
+    name: "Pre-build environment checks"
     command: |
-      echo "JAVA VERSION: $(java -version)"
-      echo "JAVA HOME: $JAVA_HOME"
       echo "Current dir: $(pwd)"
       echo "Current dir contents: $(ls -alh)"
       echo "Tag : ${TAG}"
   - type: Command
+    name: "Docker login"
+    command: |
+      echo "Do a docker login before running the docker build step"
+      echo "REGISTRY_NAME: " ${REGISTRY_NAME}
+      docker login ${REGISTRY_NAME} -u ${REGISTRY_USER} -p ${REGISTRY_PASS}
+  - type: Command
     name: "Docker build"
     command: |
       echo "Running multistage build to build the JAR and dockerize our app JAR."
-      echo "REGISTRY_NAME: " ${REGISTRY_NAME}
-      docker login ${REGISTRY_NAME} -u ${REGISTRY_USER} -p ${REGISTRY_PASS}
       docker build -f ./Dockerfiles/multistage/Dockerfile.gvmee-jar \
                   --build-arg JAR_FILE=${JAR_FILE} \
                   -t ${TAG} .
