@@ -287,7 +287,7 @@ Let's see how we can automate the build and deployment using the OCI DevOps serv
 
 7. Add artifact. `<region-code>.ocir.io/<tenancy-namespace>/<repo-prefix>/jibber-jar-gvmee2130-jdk17:${BUILDRUN_HASH}`
 
-8. Add a `Stage >> Deliver artificats` after the Managed Build stage.
+8. Add a `Stage >> Deliver artifacts` after the Managed Build stage.
 
 9. Go to OCIR and create an empty Private Repository named `<repo-prefix>/jibber-jar-gvmee2130-jdk17` in your compartment.
 
@@ -354,7 +354,7 @@ Let's see how we can automate the build and deployment using the OCI DevOps serv
     ```
     Click Add.
 
-9. Add a `Stage >> Deliver artificats` after the Managed Build stage.
+9. Add a `Stage >> Deliver artifacts` after the Managed Build stage.
     ```
     Stage name: Push the runtime image containing the app native executable to OCIR
 
