@@ -248,15 +248,52 @@ Let's see how we can automate the build and deployment using the OCI DevOps serv
 ### Use OCI DevOps to build the app JAR (step0)
 
 1. Mirror the GitHub repo `DevOps Project >> Code repositories >> Mirror repository`.
+
 2. Each time you make a change to the GitHub repo, synchornize the changes in the OCI. `DevOps Project >> Code repositories >> github_graal-containers >> Synchronize now`.
+
 3. Create a `Build pipeline`.
-4. Add a `Stage >> Managed Build` to the build pipeline.
-5. Test the build pipeline by clicking the `Start manual run` button.
-6. Add artifact. `<region-code>.ocir.io/<tenancy-namespace>/<repo-prefix>/jibber-jar-gvmee2130-jdk17:${BUILDRUN_HASH}`
-7. Add a `Stage >> Deliver artificats` after the Managed Build stage.
-8. Go to OCIR and create an empty Private Repository named `<repo-prefix>/jibber-jar-gvmee2130-jdk17` in your compartment.
-9. Test the build pipeline again by clicking the `Start manual run` button. The image should be pushed to the OCIR repo. 
-10. To test the image on local, 
+
+4. From `Build pipelines >> Parameters`, add a new parameter with the following details:
+    ```
+    Name: REGISTRY_NAME
+    Default value: container-registry.oracle.com
+    ```
+    Click `+` to add.
+
+5. From `Build pipelines`, add a `Stage >> Managed Build` to the build pipeline. Enter the following details:
+    ```
+    Stage name: Build the app JAR in the jdk-ee container
+
+    Description: Build the app JAR in the GraalVM jdk-ee container
+
+    Build spec file path: build_spec_step0.yaml
+    ```
+    For the `Primary code repository`, select the following values:
+    ```
+    Source: Connection type: OCI Code Repository
+    
+    From the list of repos, select the "github_graal-containers" repo.
+
+    Select Branch: main
+
+    Build source name: gvmee
+    ```
+    Leave all other values unchanged.
+
+    **Note:** The `Build source name` is the name of the folder where the build service will check out the code from the repository.
+
+
+6. Test the build pipeline by clicking the `Start manual run` button.
+
+7. Add artifact. `<region-code>.ocir.io/<tenancy-namespace>/<repo-prefix>/jibber-jar-gvmee2130-jdk17:${BUILDRUN_HASH}`
+
+8. Add a `Stage >> Deliver artificats` after the Managed Build stage.
+
+9. Go to OCIR and create an empty Private Repository named `<repo-prefix>/jibber-jar-gvmee2130-jdk17` in your compartment.
+
+10. Test the build pipeline again by clicking the `Start manual run` button. The image should be pushed to the OCIR repo. 
+
+11. To test the image on local, 
     - Mark the OCIR repo as public. 
     - Docker pull the new image (with the new tag) on local. 
     - Update the image tag in the docker-compose.yml file for the `jibber-jar-gvmee-jdk17` service. 
