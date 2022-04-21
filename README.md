@@ -135,7 +135,117 @@ Docker provides a single command that will clean up any resources — images, co
 docker system prune -a
 ```
 
-## Use OCI DevOps to build the app JAR (step0)
+## Use OCI DevOps
+
+Let's see how we can automate the build and deployment using the OCI DevOps service.
+
+### DevOps Dynamic Groups and IAM Policies
+
+#### DevOps Connections and Repositories
+
+1. Create a dynamic group for all DevOps Connections and Repositories in your compartment.
+    ```
+    Name: dg-dev-comp-devops-conn-repo
+
+    Description: Dynamic group for all DevOps Connections and Repositories in compartment dev
+
+    Matching Rules:
+        Match any rules defined below
+        
+        Rule 1
+            ALL {resource.type = 'devopsconnection', resource.compartment.id = 'ocid1.compartment.oc1..aaa...xyz'}
+
+        Rule 2
+            ALL {resource.type = 'devopsrepository', resource.compartment.id = 'ocid1.compartment.oc1..aaa...xyz'}
+
+    ```
+
+2. In your compartment, create a policy to allow DevOps Connections and Repositories to access your GitHub personal access token (PAT) from the OCI Vault.
+    ```
+    Compartment: dev
+
+    Name: devops-vault-access
+
+    Description: Policy to allow DevOps Connections and Repositories to access your GitHub/GitLab PAT from the Vault
+
+    Policy Statements:
+        Allow dynamic-group dg-dev-comp-devops-conn-repo to read secret-family in compartment dev
+
+    ```
+
+#### DevOps Build Pipelines
+
+1. Create a dynamic group for all DevOps Build Pipelines in your compartment.
+    ```
+    Name: dg-dev-comp-devops-build-pipeline
+
+    Description: Dynamic group for all DevOps Build Pipelines in compartment dev
+
+    Matching Rules:
+        Match any rules defined below
+        
+        Rule 1
+            ALL {resource.type = 'devopsbuildpipeline', resource.compartment.id = 'ocid1.compartment.oc1..aaa...xyz'}
+
+    ```
+
+2. In your compartment, create a policy for DevOps build pipelines.
+    ```
+    Compartment: dev
+
+    Name: devops-build-pipelines-policies
+
+    Description: Policy needed for DevOps build pipelines
+
+    Policy Statements:
+        Allow dynamic-group dg-dev-comp-devops-build-pipeline to manage repos in compartment dev
+        
+        Allow dynamic-group dg-dev-comp-devops-build-pipeline to read secret-family in compartment dev
+        
+        Allow dynamic-group dg-dev-comp-devops-build-pipeline to manage devops-family in compartment dev
+        
+        Allow dynamic-group dg-dev-comp-devops-build-pipeline to manage generic-artifacts in compartment dev
+        
+        Allow dynamic-group dg-dev-comp-devops-build-pipeline to use ons-topics in compartment dev
+
+    ```
+
+#### DevOps Deployment Pipelines
+
+1. Create a dynamic group for all DevOps Deployment Pipelines in your compartment.
+    ```
+    Name: dg-dev-comp-devops-deploy-pipeline
+
+    Description: Dynamic group for all DevOps Deployment Pipelines in compartment dev
+
+    Matching Rules:
+        Match any rules defined below
+        
+        Rule 1
+            ALL {resource.type = 'devopsdeploypipeline', resource.compartment.id = 'ocid1.compartment.oc1..aaa...qba'}
+
+    ```
+
+2. In your compartment, create a policy for Deployment Pipelines. 
+    ```
+    Compartment: dev
+
+    Name: devops-deploy-pipelines-policies
+
+    Description: Policy needed for DevOps deploy pipelines
+
+    Policy Statements:
+        Allow dynamic-group dg-dev-comp-devops-deploy-pipeline to manage all-resources in compartment ssp-tf-play
+
+    ```
+
+### Store your GitHub PAT in the OCI Vault
+
+1. Create an OCI Vault in the compartment `dev`.
+2. In this Vault, create a master encryption key in the same compartment.
+3. In this Vault, create a secret for your GitHub personal access token (PAT) in the same compartment.
+
+### Use OCI DevOps to build the app JAR (step0)
 
 1. Mirror the GitHub repo `DevOps Project >> Code repositories >> Mirror repository`.
 2. Each time you make a change to the GitHub repo, synchornize the changes in the OCI. `DevOps Project >> Code repositories >> github_graal-containers >> Synchronize now`.
