@@ -27,8 +27,8 @@ docker images -a
 ```
 Here's the output of the command:
 ```
-REPOSITORY         TAG                  IMAGE ID       CREATED       SIZE
-localhost/jibber   gvmee-jdk17-0.0.1    40d34310d953   2 hours ago   613MB
+REPOSITORY                   TAG      IMAGE ID       CREATED       SIZE
+jibber-jar-gvmee2130-jdk17   0.0.1    40d34310d953   2 hours ago   613MB
 ```
 
 ### Run the App JAR
