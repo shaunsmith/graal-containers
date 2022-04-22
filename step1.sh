@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-REPO=localhost
-APP=jibber
-TYPE=gvmee-native
-VER=0.0.1
-TAG=${REPO}/${APP}:${TYPE}.${VER}
+TAG="jibber-ni-gvmee2130-jdk17:0.0.1"
 APP_FILE=jibber
 echo "Tag : ${TAG}"
 

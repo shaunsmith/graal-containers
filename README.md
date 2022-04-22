@@ -72,8 +72,8 @@ docker images -a
 ```
 Here's the output of the command:
 ```
-REPOSITORY         TAG                  IMAGE ID       CREATED       SIZE
-localhost/jibber   gvmee-native.0.0.1   daa1a94f4104   2 hours ago   196MB
+REPOSITORY                  TAG     IMAGE ID       CREATED       SIZE
+jibber-ni-gvmee2130-jdk17   0.0.1   daa1a94f4104   2 hours ago   196MB
 ```
 
 ### Troubleshoot Native Image Build Errors

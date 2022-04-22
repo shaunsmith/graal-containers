@@ -153,6 +153,7 @@
 							<imageName>jibber</imageName>
 							<buildArgs>
 								<buildArg>-H:+ReportExceptionStackTraces</buildArg>
+								<buildArg>-H:+StaticExecutableWithDynamicLibC</buildArg>
 								<buildArg>--no-fallback</buildArg>
 								<buildArg>--verbose</buildArg>
 							</buildArgs>
