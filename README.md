@@ -43,9 +43,9 @@ With the `jibber-jar-gvmee-jdk17:` section uncommented, run the following comman
 docker-compose up --remove-orphans
 ```
 
-This will now start the folloing version of the app, on port 8080. Access the following URL in a browser and you should see a nonsense verse. 
+This will now start the folloing version of the app, on port 8081. Access the following URL in a browser and you should see a nonsense verse. 
 
-* Java: http://localhost:8080/jibber
+* Java: http://localhost:8081/jibber
 
 ### Stop the App JAR
 
