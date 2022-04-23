@@ -54,9 +54,9 @@ services:
   jibber-ni-gvmce-jdk17:
   ### OCI DevOps Build Pipelines
   ### Don't forget to replace the tag after running the build pipeline
-    # image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmce22-jdk17:qcvu5ur
+    image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmce22-jdk17:qug3cic
   ### Local machine
-    image: jibber-ni-gvmce22-jdk17:0.0.1
+    # image: jibber-ni-gvmce22-jdk17:0.0.1
 #    restart: 
     mem_limit: 128m
     memswap_limit: 128m

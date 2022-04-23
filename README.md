@@ -441,6 +441,7 @@ Let's see how we can automate the build and deployment using the OCI DevOps serv
         Type: Docker image
         Build config/result artifact name: Build_output_image (should match the "name" of the "outputArtifacts" from your build_spec_step1_ce.yml file)
     ```
+    Click `Add`.
 
 10. Go to OCIR and create an empty Private Repository named `gvm/jibber-ni-gvmce22-jdk17` in your compartment.
 
@@ -448,9 +449,10 @@ Let's see how we can automate the build and deployment using the OCI DevOps serv
 
 12. To test the image on local, 
     - Mark the OCIR repo as public. 
-    - Optionally, docker pull the new image (with the new tag) on local. 
     - Update the image tag in the docker-compose.yml file for the `jibber-ni-gvmce-jdk17` service. 
     - Run `docker-compose up --remove-orphans` to start the application on port 8080.
     - Run `docker ps -a` to check status of the running container.
     - Go to http://localhost:8083/jibber in a browser and you should see a nonsense verse.
     - Run `docker-compose stop` in another terminal window to stop the application.
+    - Mark the OCIR repo as private. 
+    
