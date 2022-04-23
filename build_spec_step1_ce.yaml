@@ -1,0 +1,51 @@
+version: 0.1
+component: build
+timeoutInSeconds: 1000
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    TAG: "jibber-ni-gvmce22-jdk17:0.0.1"
+    APP_FILE: "jibber"
+
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    - BUILDRUN_HASH
+
+steps:
+  - type: Command
+    name: "Define unique image tag"
+    timeoutInSeconds: 140
+    command: |
+      echo "OCI_BUILD_RUN_ID: ${OCI_BUILD_RUN_ID}"
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+  - type: Command
+    name: "Pre-build environment checks"
+    command: |
+      echo "Current dir: $(pwd)"
+      echo "Current dir contents: $(ls -alh)"
+      echo "Tag : ${TAG}"
+  - type: Command
+    name: "Docker build"
+    command: |
+      echo "Running multistage build to build the app, generate a native executable and package it in a runtime image."
+      docker build -f ./Dockerfiles/multistage/Dockerfile.gvmce-ni \
+                  --build-arg APP_FILE=${APP_FILE} \
+                  -t ${TAG} .
+      echo "DONE"
+      printf "List of docker images:\n $(docker images)"  
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          build_result=FAILURE
+          echo "Failure successfully handled"
+outputArtifacts:
+  - name: Build_output_image
+    type: DOCKER_IMAGE
+    # this is only the locally exported container image name
+    # this location tag doesn't effect the tag used to deliver the container image
+    # to the Container Registry.
+    location: ${TAG}
