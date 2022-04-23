@@ -1,10 +1,13 @@
 #
-# This is a multistange Docker build where we use:
-# - GraalVM Enterprise 21.3 Native Image Java 17 as the base build image to 
-#    - build the app JAR
-#    - generate the app native executable
-# - Oracle Linux 8-slim as the base runtime image to 
-#    - ship the app native executable
+# This is a multistage Docker build where we use:
+# 1) GraalVM Enterprise 21.3 Native Image Java 17 as the base build image to 
+#    build the app JAR and generate the app native executable
+# 2) A Linux container image with glibc as the base runtime image to 
+#    ship the app native executable.
+#    Option 1: With frolvlad/alpine-glibc, the runtime image size is 84.1 MB
+#    Option 2: With gcr.io/distroless/base, the runtime image size is 91.2 MB
+#    Option 3: With debian:buster-slim, the runtime image size is 140 MB
+#    Option 4: With oraclelinux:8-slim, the runtime image size is 181 MB
 #
 
 #
@@ -50,10 +53,17 @@ COPY pom.xml pom.xml
 RUN mvn clean package -DskipTests -Pnative
 
 #
-# Final stage: Create a runtime image
+# Final stage: Create a runtime image from any Linux container image with glibc
 #
-# FROM container-registry.oracle.com/os/oraclelinux:8-slim AS runtime
+# Option 1: frolvlad/alpine-glibc
+# FROM frolvlad/alpine-glibc AS runtime
+# Option 2: gcr.io/distroless/base
 FROM gcr.io/distroless/base AS runtime
+# Option 3: debian:buster-slim
+# FROM debian:buster-slim AS runtime
+# Option 4: oraclelinux:8-slim
+# FROM oraclelinux:8-slim AS runtime
+# FROM container-registry.oracle.com/os/oraclelinux:8-slim AS runtime
 
 ARG APP_FILE
 EXPOSE 8080

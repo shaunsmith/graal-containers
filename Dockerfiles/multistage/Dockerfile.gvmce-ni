@@ -1,5 +1,5 @@
 #
-# This is a multistange Docker build where we use:
+# This is a multistage Docker build where we use:
 # 1) GraalVM Community 22 Native Image Java 17 as the base build image to 
 #    build the app JAR and generate the app native executable
 # 2) A Linux container image with glibc as the base runtime image to 
