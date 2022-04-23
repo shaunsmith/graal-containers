@@ -62,7 +62,7 @@ docker-compose stop
 You can use GraalVM Native Image to generate a native executable for this app. We have another shell script that uses multistage Docker build to build the app JAR, generate the app native executable and  ship the native executable in a separate runtime docker image.
 
 ```bash
-./step1.sh
+./step1-ee.sh
 ```
 
 Run this command to see the new docker image:

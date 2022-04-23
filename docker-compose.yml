@@ -7,49 +7,70 @@ volumes:
 services:
 
   # Apps
-  jibber-jar-gvmee-jdk17:
-  ### OCI DevOps Build Pipelines
-  ### Don't forget to replace the tag after running the build pipeline
-    # image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-jar-gvmee2130-jdk17:qdxasw6
-  ### Local machine
-    image: jibber-jar-gvmee2130-jdk17:0.0.1
-#    restart: always
-    mem_limit: 512m
-    memswap_limit: 512m
-    cpu_count: 4
-    cpu_percent: 100
-    cpus: 4
-    container_name: jibber-jar-gvmee-jdk17
-    command:
-      - "-jar"
-      - "app.jar"
-      - '-Xms64m'
-      - '-Xmx64m'
-    # depends_on:
-    #   - "prom"
-    ports:
-      - "8081:8080"
+#   jibber-jar-gvmee-jdk17:
+#   ### OCI DevOps Build Pipelines
+#   ### Don't forget to replace the tag after running the build pipeline
+#     # image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-jar-gvmee2130-jdk17:qdxasw6
+#   ### Local machine
+#     image: jibber-jar-gvmee2130-jdk17:0.0.1
+# #    restart: always
+#     mem_limit: 512m
+#     memswap_limit: 512m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-jar-gvmee-jdk17
+#     command:
+#       - "-jar"
+#       - "app.jar"
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     # depends_on:
+#     #   - "prom"
+#     ports:
+#       - "8081:8080"
 
-  jibber-ni-gvmee-jdk17:
+#   jibber-ni-gvmee-jdk17:
+#   ### OCI DevOps Build Pipelines
+#   ### Don't forget to replace the tag after running the build pipeline
+#     # image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmee2130-jdk17:qcvu5ur
+#   ### Local machine
+#     image: jibber-ni-gvmee2130-jdk17:0.0.1
+# #    restart: 
+#     mem_limit: 128m
+#     memswap_limit: 128m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-ni-gvmee-jdk17
+#     command:
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     # depends_on:
+#     #   - "prom"
+#     ports:
+#       - "8082:8080"
+
+  jibber-ni-gvmce-jdk17:
   ### OCI DevOps Build Pipelines
   ### Don't forget to replace the tag after running the build pipeline
-    # image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmee2130-jdk17:qcvu5ur
+    # image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmce22-jdk17:qcvu5ur
   ### Local machine
-    image: jibber-ni-gvmee2130-jdk17:0.0.1
+    image: jibber-ni-gvmce22-jdk17:0.0.1
 #    restart: 
     mem_limit: 128m
     memswap_limit: 128m
     cpu_count: 4
     cpu_percent: 100
     cpus: 4
-    container_name: jibber-ni-gvmee-jdk17
+    container_name: jibber-ni-gvmce-jdk17
     command:
       - '-Xms64m'
       - '-Xmx64m'
     # depends_on:
     #   - "prom"
     ports:
-      - "8082:8080"
+      - "8083:8080"
 
 #   jibber-nig1:
 #     image: localhost/jibber:nativeg1.0.1
