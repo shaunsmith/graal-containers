@@ -34,10 +34,10 @@ services:
   ### OCI DevOps Build Pipelines
   ### Don't forget to replace the tag after running the build pipeline
     # image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmee2130-jdk17:qcvu5ur
-    # image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmee22-jdk17:qcvu5ur
+    image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmee22-jdk17:adqshxj
   ### Local machine
     # image: jibber-ni-gvmee2130-jdk17:0.0.1
-    image: jibber-ni-gvmee22-jdk17:0.0.1
+    # image: jibber-ni-gvmee22-jdk17:0.0.1
 #    restart: 
     mem_limit: 128m
     memswap_limit: 128m
