@@ -156,6 +156,8 @@
 								<buildArg>-H:+StaticExecutableWithDynamicLibC</buildArg>
 								<buildArg>--no-fallback</buildArg>
 								<buildArg>--verbose</buildArg>
+								<!-- For Quick Build (22.1+) -->
+								<buildArg>-Ob</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
