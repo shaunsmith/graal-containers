@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TAG="jibber-ni-gvmee2130-jdk17:0.0.1"
+TAG="jibber-ni-gvmee22-jdk17:0.0.1"
 APP_FILE=jibber
 echo "Tag : ${TAG}"
 

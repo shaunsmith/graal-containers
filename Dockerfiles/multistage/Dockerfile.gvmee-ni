@@ -1,6 +1,6 @@
 #
 # This is a multistage Docker build where we use:
-# 1) GraalVM Enterprise 21.3 Native Image Java 17 as the base build image to 
+# 1) GraalVM Enterprise 22 Native Image Java 17 Oracle Linux 8 as the base build image to 
 #    build the app JAR and generate the app native executable
 # 2) A Linux container image with glibc as the base runtime image to 
 #    ship the app native executable.
@@ -13,7 +13,7 @@
 #
 # First Stage - Build stage: Build the app JAR file and generate the app native executable
 #
-FROM container-registry.oracle.com/graalvm/native-image-ee:java17-21.3 AS builder
+FROM container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 AS builder
 
 # Install tar and gzip to extract the Maven binaries
 RUN microdnf update \

@@ -5,7 +5,7 @@ shell: bash
 env:
   # these are local variables to the build config
   variables:
-    TAG: "jibber-ni-gvmee2130-jdk17:0.0.1"
+    TAG: "jibber-ni-gvmee22-jdk17:0.0.1"
     APP_FILE: "jibber"
 
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
