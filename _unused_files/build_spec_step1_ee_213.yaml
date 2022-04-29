@@ -5,8 +5,8 @@ shell: bash
 env:
   # these are local variables to the build config
   variables:
-    TAG: "jibber-jar-gvmee2130-jdk17:0.0.1"
-    JAR_FILE: "jibber-0.0.1-SNAPSHOT-exec.jar" # Must match the value in pom.xml
+    TAG: "jibber-ni-gvmee2130-jdk17:0.0.1"
+    APP_FILE: "jibber"
 
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
   # you can then access the value of that secret in your build_spec.yaml commands
@@ -15,7 +15,7 @@ env:
     REGISTRY_PASS: "ocid1.vaultsecret.oc1.phx.amaaaaaacrsaiiiabpyc5irykfrlaslc2scpovtksye5ftbw6zkf6z7knkqq"
 
   # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
-  # For this build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
   exportedVariables:
     - BUILDRUN_HASH
 
@@ -42,9 +42,9 @@ steps:
   - type: Command
     name: "Docker build"
     command: |
-      echo "Running multistage build to build the JAR and dockerize our app JAR."
-      docker build -f ./Dockerfiles/multistage/Dockerfile.gvmee-jar \
-                  --build-arg JAR_FILE=${JAR_FILE} \
+      echo "Running multistage build to build the app, generate a native executable and package it in a runtime image."
+      docker build -f ./Dockerfiles/multistage/Dockerfile.gvmee-ni \
+                  --build-arg APP_FILE=${APP_FILE} \
                   -t ${TAG} .
       echo "DONE"
       printf "List of docker images:\n $(docker images)"  

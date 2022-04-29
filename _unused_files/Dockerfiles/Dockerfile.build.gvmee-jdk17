@@ -1,0 +1,21 @@
+#
+# Build stage
+#
+FROM container-registry.oracle.com/graalvm/jdk-ee:java17-21.3
+
+# COPY src, pom.xml /home/app/src
+# COPY pom.xml /home/app
+
+COPY . /home/app
+
+# RUN echo "Building Java..."
+# RUN mvn clean package -DskipTests
+# RUN echo "DONE"
+
+# ARG JAR_FILE
+
+# EXPOSE 8080
+
+# COPY target/${JAR_FILE} app.jar
+# ENTRYPOINT ["java"]
+# CMD ["-jar","app.jar"]

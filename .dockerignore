@@ -1,4 +1,5 @@
-# Ignore the Dockerfiles, images, prometheus, target folders (except the jibber native executable)
+# Ignore the _do_not_use, Dockerfiles, images, prometheus, target folders (except the jibber native executable)
+_unused_files
 Dockerfiles
 images
 prometheus
