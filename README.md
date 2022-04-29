@@ -111,20 +111,6 @@ From another terminal window, run the following command:
 docker-compose stop
 ```
 
-
-## Optional: Review the Performance
-
-You can access the app over the following URL (depending on where you run it you may need to setup port forwarding):
-
-[Jibber Endpoint](http://localhost:8081/jibber)
-
-Run the followinf script to get som efun stats on the container, start-up times and latency for the end point:
-
-```bash
-./stats.sh
-```
-
-
 ## Purge all Docker Resources - Images, Containers, Volumes, and Networks
 
 ***Credits: https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes***
