@@ -41,6 +41,8 @@ We have a shell script that uses multistage Docker build to build a JAR file (us
 ./step0.sh
 ```
 
+If you are prompted to `docker login` to OCR, enter you OCR user and password.
+
 Run this command to see the docker image:
 
 ```bash
@@ -85,6 +87,9 @@ You can use GraalVM Native Image to generate a native executable for this app. W
 ```bash
 ./step1-ee.sh
 ```
+If you are prompted to `docker login` to OCR, enter you OCR user and password.
+
+**Note:** To use the GraalVM Community edition instead of the GraalVM Enterprise edition, use `./step1-ce.sh`.
 
 Run this command to see the new docker image:
 
