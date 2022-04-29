@@ -10,6 +10,27 @@ We will be using a Spring Boot application as our test-bed. This is a fairly sim
 generates a nonsense verse, in the style of the poem Jabberwocky (by Lewis Carrol). To do this remarkable
 feat it uses a Markov chain to model the text of the original poem and this model is then used to generate random text that appear to be like the original.
 
+## GraalVM Enterprise container images
+
+This lab contains examples of both GraalVM Enterprise (ee) and GraalVM Community (ce) container images. GraalVM Enterprise container images are available in Oracle Container Registry (OCR) at https://container-registry.oracle.com in the GraalVM product section. In order to use the GraalVM Enterprise container images, you will need to create an Oracle account (no credit card needed), sign in with your Oracle account and accept the license under for GraalVM Enterprise `jdk-ee` and `native-image-ee` repositories.
+
+1. Go to OCR at https://container-registry.oracle.com
+
+2. Click on the `GraalVM` tile in the `Browse Containers` section.
+
+3. Click on the `native-image-ee` repository.
+
+4. Click on the `Sign In` button. You will be redirected to the `Oracle account sign-in` page.
+
+5. If you already have an Oracle account, you can sign in. If not, click on the `Create Account` button in the `Don't have an Oracle Account?` section.
+
+6. Once you've signed in, you can view and accept the license agreement for the Oracle container (`native-image-ee`) you have selected.
+
+7. Go to `GraalVM Repositories` >> `jdk-ee`.
+
+8. View and accept the license agreement for the Oracle container (`jdk-ee`) you have selected.
+
+
 ## App JAR
 
 ### Build the App JAR
@@ -225,11 +246,22 @@ Let's see how we can automate the build and deployment using the OCI DevOps serv
 
     ```
 
-### Store your GitHub PAT in the OCI Vault
+### Store your GitHub PAT, OCR user and OCR password in the OCI Vault
 
 1. Create an OCI Vault in the compartment `dev`.
+
 2. In this Vault, create a master encryption key in the same compartment.
-3. In this Vault, create a secret for your GitHub personal access token (PAT) in the same compartment.
+
+3. In this Vault, create a secret for your `GitHub personal access token (PAT)` in the same compartment.
+
+4. In this Vault, create a secret for your `Oracle Container Registry (OCR) user` in the same compartment.
+
+5. In this Vault, create a secret for your `Oracle Container Registry (OCR) password` in the same compartment.
+
+6. Go to the [build_spec_step0.yaml](./build_spec_step0.yaml) file and update the OCID value of the `REGISTRY_USER` and `REGISTRY_PASS` in the `vaultVariables` section.
+
+7. Go to the [build_spec_step1_ee.yaml](./build_spec_step1_ee.yaml) file and update the OCID value of the `REGISTRY_USER` and `REGISTRY_PASS` in the `vaultVariables` section.
+
 
 ### Use OCI DevOps to build the app JAR (step0)
 
