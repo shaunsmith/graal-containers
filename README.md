@@ -502,4 +502,4 @@ Let's see how we can deploy the app on OKE and test it.
     kubectl get svc  -o wide
     ```
 
-6. To test the application running on OKE, go to http://<EXTERNAL-IP>/jibber in a browser and you should see a nonsense verse.
+6. To test the application running on OKE, go to `http://<EXTERNAL-IP>/jibber` in a browser and you should see a nonsense verse.
