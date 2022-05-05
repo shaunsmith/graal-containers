@@ -479,3 +479,27 @@ Let's see how we can automate the build and deployment using the OCI DevOps serv
     - Run `docker-compose stop` in another terminal window to stop the application.
     - Mark the OCIR repo as private. 
     
+
+
+## Deploy and test the App on OKE
+
+Let's see how we can deploy the app on OKE and test it.
+
+1. From the `OCI Console >> Developer Services >> Kubernetes Clusters (OKE)`, create a single node OKE Cluster in your compartment.
+
+2. From the cluster details page, go to `Quick Start >> Access Your Cluster`, download the kubeconfig file and set up your local environment.
+
+3. Update the value of the `spec.template.spec.containers.image:` in the [kube-manifest_step1_ee.yaml](./kube-manifest_step1_ee.yaml) to use the latest image/tag published to OCIR using the DevOps Build Pipeline in the previous step.
+
+4. Deploy the selected image from OCIR using the following command:
+    ```shell
+    kubectl apply -f ./kube-manifest_step1_ee.yaml
+    ```
+    This will deploy the selected image and start the container in your OKE cluster. It will provision an OCI Load Balancer, and expose the application using the external (public) IP address of the load balancer.  
+
+5. Get the load balancer's external (public) IP address by running this command:
+    ```shell
+    kubectl get svc  -o wide
+    ```
+
+6. To test the application running on OKE, go to http://<EXTERNAL-IP>/jibber in a browser and you should see a nonsense verse.
