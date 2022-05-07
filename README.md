@@ -28,5 +28,5 @@ feat it uses a Markov chain to model the text of the original poem and this mode
     - 5.4: [OCI DevOps - Build the app native executable using GraalVM Enterprise](./docs/08.md)
     - 5.5: [OCI DevOps - Deploy the runtime image containing the app native executable](./docs/09.md)
     - 5.6: [OCI DevOps - Build the app native executable using GraalVM Community Edition](./docs/10.md)
-    - 5.7: [OCI DevOps - Build the app JAR](./docs/07.md)
-6. [OKE - Deploy and test the App on OKE](./docs/11.md)
+    - 5.7: [OCI DevOps - Build the app JAR](./docs/11.md)
+6. [OKE - Deploy and test the App on OKE](./docs/12.md)
