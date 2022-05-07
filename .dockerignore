@@ -1,23 +1,26 @@
-# Ignore the _do_not_use, Dockerfiles, images, prometheus, target folders (except the jibber native executable)
+# Ignore folders: _do_not_use, devops-build-spec, Dockerfiles, images, oke-manifests, prometheus, scripts, and target (except the jibber native executable)
 _unused_files
+devops-build-spec
 Dockerfiles
 images
+oke-manifests
 prometheus
+scripts
 target
 !target/jibber
 
-#Ignoring git, mvn, cache folders
+# Ignore folders: git, mvn, cache
 .git
 .mvn
 .cache
 **/.DS_Store
 
-#Ignoring the .dockerignore, .gitignore and LICENSE files
+# Ignore files: .dockerignore, .gitignore and LICENSE
 .dockerignore
 .gitignore
 LICENSE
 
-#Ignoring all the markdown, shell scripts, yml and class files
+# Ignore all the markdown, shell scripts, yml and class files
 *.md
 *.sh
 *.cmd
