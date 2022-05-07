@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jibber-ni-gvmee22-jdk17-deploy
+  labels:
+    app: jibber-ni-gvmee22-jdk17
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jibber-ni-gvmee22-jdk17
+  template:
+    metadata:
+      labels:
+        app: jibber-ni-gvmee22-jdk17
+    spec:
+      containers:
+      - name: jibber-ni-gvmee22-jdk17-container
+        image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmee22-jdk17:${BUILDRUN_HASH}
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: ocircreds
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jibber-ni-gvmee22-jdk17-service
+  labels:
+    app: jibber-ni-gvmee22-jdk17
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: jibber-ni-gvmee22-jdk17

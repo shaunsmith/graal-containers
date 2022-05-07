@@ -16,13 +16,11 @@ spec:
     spec:
       containers:
       - name: jibber-ni-gvmee22-jdk17-container
-        # image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmee22-jdk17:a5aa5nw
-        image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmee22-jdk17:${BUILDRUN_HASH}
+        image: phx.ocir.io/oracledeveloper/ssp-tf-play/jibber-ni-gvmee22-jdk17:abxphm5
         ports:
         - containerPort: 8080
       imagePullSecrets:
       - name: ocircreds
-
 
 ---
 apiVersion: v1
