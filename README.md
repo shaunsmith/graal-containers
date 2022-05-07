@@ -13,10 +13,11 @@ feat it uses a Markov chain to model the text of the original poem and this mode
 ## Table of contents
 
 1. [GraalVM Enterprise container images](./docs/01.md)
-2. [App Native Executable](./docs/02.md)
-    - 2.1: Build on local machine
-    - 2.2: Troubleshoot
-    - 2.3: Run on local machine
+2. App Native Executable
+    | GraalVM Enterprise | GraalVM Community |
+    | --------------- | --------------- |
+    | [Build app native executable](./docs/02-ee.md) | [Build app native executable](./docs/02-ce.md) |
+
 3. [App Jar](./docs/03.md)
     - 3.1. Build on local machine
     - 3.2. Run on local machine
