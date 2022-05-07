@@ -1,13 +1,14 @@
 #
-# This is a multistange Docker build where we use GraalVM Enterprise 21.3 JDK 17 
-# - as the base build image to build the app JAR, and
-# - as the base runtime image to ship the app JAR
+# This is a multistange Docker build where we use GraalVM Enterprise 22 JDK 17 Oracle Linux 8 as the
+# 1) base build image to build the app JAR, and
+# 2) base runtime image to ship the app JAR
 #
 
 #
 # First Stage - Build stage: Build the application JAR file
 #
-FROM container-registry.oracle.com/graalvm/jdk-ee:java17-21.3 AS builder
+# FROM container-registry.oracle.com/graalvm/jdk-ee:java17-21.3 AS builder
+FROM container-registry.oracle.com/graalvm/jdk-ee:ol8-java17-22 AS builder
 
 # Install tar and gzip to extract the Maven binaries
 RUN microdnf install tar gzip
@@ -44,7 +45,8 @@ RUN mvn clean package -DskipTests
 #
 # Final stage: Create a runtime image
 #
-FROM container-registry.oracle.com/graalvm/jdk-ee:java17-21.3 AS runtime
+# FROM container-registry.oracle.com/graalvm/jdk-ee:java17-21.3 AS runtime
+FROM container-registry.oracle.com/graalvm/jdk-ee:ol8-java17-22 AS runtime
 
 ARG JAR_FILE
 EXPOSE 8080
