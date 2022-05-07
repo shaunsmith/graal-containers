@@ -18,9 +18,11 @@ feat it uses a Markov chain to model the text of the original poem and this mode
     | --------------- | --------------- |
     | [Build app native executable](./docs/02-ee.md) | [Build app native executable](./docs/02-ce.md) |
 
-3. [App Jar](./docs/03.md)
-    - 3.1. Build on local machine
-    - 3.2. Run on local machine
+3. App JAR
+    | GraalVM Enterprise | GraalVM Community |
+    | --------------- | --------------- |
+    | [Build app JAR](./docs/03.md) | -- |
+
 4. [Clean up](./docs/04.md)
 5. OCI DevOps
     - 5.1: [Create Dynamic Groups and IAM Policies](./docs/05.md)
