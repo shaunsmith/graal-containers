@@ -36,7 +36,14 @@ feat it uses a Markov chain to model the text of the original poem and this mode
     - 5.5: OKE - Manually deploy the app native executable on OKE and test it
         | GraalVM Enterprise | GraalVM Community |
         | --------------- | --------------- |
-        | [Build app native executable](./docs/09.md) | -- |
+        | [Deploy app native executable](./docs/09.md) | -- |
 
-    - 5.6: [Use DevOps Deployment Pipelines to deploy the app native executable on OKE](./docs/10.md)
-    - 5.7: [Use DevOps Build Pipelines to build the app JAR with GraalVM Enterprise](./docs/11.md)
+    - 5.6: Use DevOps Deployment Pipelines to deploy the app native executable on OKE
+        | GraalVM Enterprise | GraalVM Community |
+        | --------------- | --------------- |
+        | [Deploy app native executable](./docs/10.md) | -- |
+
+    - 5.7: Use DevOps Build Pipelines to build the app JAR
+        | GraalVM Enterprise | GraalVM Community |
+        | --------------- | --------------- |
+        | [Build app JAR](./docs/11.md) | -- |
