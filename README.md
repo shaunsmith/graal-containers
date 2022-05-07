@@ -22,9 +22,9 @@ feat it uses a Markov chain to model the text of the original poem and this mode
     - 3.2. Run on local machine
 4. [Clean up](./docs/04.md)
 5. OCI DevOps
-    - 5.1: [OCI DevOps - Dynamic Groups and IAM Policies](./docs/05.md)
+    - 5.1: [OCI DevOps - Create Dynamic Groups and IAM Policies](./docs/05.md)
     - 5.2: [OCI DevOps - Store your GitHub PAT, OCR user and OCR password in the OCI Vault](./docs/06.md)
-    - 5.3: [OCI DevOps - New Project and External Connection to GitHub](./docs/07.md)
+    - 5.3: [OCI DevOps - Create a New Project and External Connection to your GitHub Account](./docs/07.md)
     - 5.4: [OCI DevOps - Build the app native executable using GraalVM Enterprise](./docs/08.md)
     - 5.5: [OCI DevOps - Deploy the runtime image containing the app native executable](./docs/09.md)
     - 5.6: [OCI DevOps - Build the app native executable using GraalVM Community Edition](./docs/10.md)
