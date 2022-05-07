@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Run this script from the project's root directory containing src and pom.xml
 
 TAG="jibber-ni-gvmee22-jdk17:0.0.1"
 APP_FILE=jibber
