@@ -29,9 +29,9 @@ feat it uses a Markov chain to model the text of the original poem and this mode
     - 5.2: [Store your GitHub PAT, OCR user and OCR password in the OCI Vault](./docs/06.md)
     - 5.3: [Create a new DevOps Project and External Connection to your GitHub Account](./docs/07.md)
     - 5.4: Use DevOps Build Pipelines to build the app native executable
-            | GraalVM Enterprise | GraalVM Community |
-            | --------------- | --------------- |
-            | [Build app native executable](./docs/08-ee.md) | [Build app native executable](./docs/08-ce.md) |
+        | GraalVM Enterprise | GraalVM Community |
+        | --------------- | --------------- |
+        | [Build app native executable](./docs/08-ee.md) | [Build app native executable](./docs/08-ce.md) |
 
     - 5.5: [OKE - Manually deploy the app native executable on OKE and test it](./docs/09.md)
     - 5.6: [Use DevOps Deployment Pipelines to deploy the app native executable on OKE](./docs/10.md)
