@@ -7,36 +7,36 @@ volumes:
 services:
 
   # Apps
-  jibber-jar-gvmee-jdk17:
-  ### OCI DevOps Build Pipelines
-  ### Don't forget to replace the tag after running the build pipeline
-    # image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-jar-gvmee2130-jdk17:qdxasw6
-    image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-jar-gvmee22-jdk17:qoekb6t
-  ### Local machine
-    # image: jibber-jar-gvmee2130-jdk17:0.0.1
-    # image: jibber-jar-gvmee22-jdk17:0.0.1
-#    restart: always
-    mem_limit: 512m
-    memswap_limit: 512m
-    cpu_count: 4
-    cpu_percent: 100
-    cpus: 4
-    container_name: jibber-jar-gvmee-jdk17
-    command:
-      - "-jar"
-      - "app.jar"
-      - '-Xms64m'
-      - '-Xmx64m'
-    # depends_on:
-    #   - "prom"
-    ports:
-      - "8081:8080"
+#   jibber-jar-gvmee-jdk17:
+#   ### OCI DevOps Build Pipelines
+#   ### Don't forget to replace the tag after running the build pipeline
+#     # image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-jar-gvmee2130-jdk17:qdxasw6
+#     image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-jar-gvmee22-jdk17:aczp6sr
+#   ### Local machine
+#     # image: jibber-jar-gvmee2130-jdk17:0.0.1
+#     # image: jibber-jar-gvmee22-jdk17:0.0.1
+# #    restart: always
+#     mem_limit: 512m
+#     memswap_limit: 512m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-jar-gvmee-jdk17
+#     command:
+#       - "-jar"
+#       - "app.jar"
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     # depends_on:
+#     #   - "prom"
+#     ports:
+#       - "8081:8080"
 
 #   jibber-ni-gvmee-jdk17:
 #   ### OCI DevOps Build Pipelines
 #   ### Don't forget to replace the tag after running the build pipeline
 #     # image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-ni-gvmee2130-jdk17:qcvu5ur
-#     image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-ni-gvmee22-jdk17:aztwnxl
+#     image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-ni-gvmee22-jdk17:ah4rqbp
 #   ### Local machine
 #     # image: jibber-ni-gvmee2130-jdk17:0.0.1
 #     # image: jibber-ni-gvmee22-jdk17:0.0.1
@@ -58,7 +58,7 @@ services:
 #   jibber-ni-gvmce-jdk17:
 #   ### OCI DevOps Build Pipelines
 #   ### Don't forget to replace the tag after running the build pipeline
-#     image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-ni-gvmce22-jdk17:aaa2aao
+#     image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-ni-gvmce22-jdk17:qkmg6gd
 #   ### Local machine
 #     # image: jibber-ni-gvmce22-jdk17:0.0.1
 # #    restart: 
