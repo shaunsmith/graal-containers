@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: jibber-ni-gvmee22-jdk17-container
-        image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-ni-gvmee22-jdk17:abxphm5
+        image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-ni-gvmee22-jdk17:ah4rqbp
         ports:
         - containerPort: 8080
       imagePullSecrets:
