@@ -1,8 +1,9 @@
 package com.example.demo;
 
-import rita.RiMarkov;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+
+import rita.RiMarkov;
 
 
 @Service
@@ -55,6 +56,7 @@ public class Jabberwocky {
             b.append(lines[i]);
             b.append("<br/>\n");
         }
+        System.out.println(b.toString());
         return b.toString();
     }
 
