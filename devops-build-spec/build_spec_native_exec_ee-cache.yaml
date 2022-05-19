@@ -1,0 +1,95 @@
+version: 0.1
+component: build
+timeoutInSeconds: 1000
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    TAG: "jibber-ni-gvmee22-jdk17:0.0.1"
+    APP_FILE: "jibber"
+    # Build cache. Credits: https://github.com/ashok-cm/oci-devops-build-caching
+    BUILD_CACHE_OS_BUCKET_NAME: build-cache
+    BUILD_CACHE_OS_FILE_NAME: jibber-cache.zip
+    BUILDX_VERSION: 0.8.2
+
+  # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
+  # you can then access the value of that secret in your build_spec.yaml commands
+  vaultVariables:
+    REGISTRY_USER: "ocid1.vaultsecret.oc1.phx.amaaaaaacrsaiiiakusyuuzlutwvxam2yxkfeaovibnya4ze2w6ck2nwqelq"
+    REGISTRY_PASS: "ocid1.vaultsecret.oc1.phx.amaaaaaacrsaiiiabpyc5irykfrlaslc2scpovtksye5ftbw6zkf6z7knkqq"
+
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    - BUILDRUN_HASH
+
+steps:
+  - type: Command
+    name: "Define unique image tag"
+    timeoutInSeconds: 140
+    command: |
+      echo "OCI_BUILD_RUN_ID: ${OCI_BUILD_RUN_ID}"
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+  - type: Command
+    name: "Pre-build environment checks"
+    command: |
+      echo "Current dir: $(pwd)"
+      echo "Current dir contents: $(ls -alh)"
+      echo "Tag : ${TAG}"
+  - type: Command
+    name: "Docker BuildKit Setup"
+    timeoutInSeconds: 140
+    command: |
+      wget https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-amd64 -O docker-buildx
+      mkdir -p ~/.docker/cli-plugins
+      mv docker-buildx ~/.docker/cli-plugins/
+      chmod +x ~/.docker/cli-plugins/docker-buildx
+      docker buildx install
+  - type: Command
+    name: "Build Cache Restore"
+    timeoutInSeconds: 140
+    command: |
+      oci os object get --bucket-name build-cache --file ${BUILD_CACHE_OS_FILE_NAME} --name ${BUILD_CACHE_OS_FILE_NAME} && unzip ${BUILD_CACHE_OS_FILE_NAME}
+      echo "Done..."
+  - type: Command
+    name: "Docker login"
+    command: |
+      echo "Do a docker login before running the docker build step"
+      echo "REGISTRY_NAME: " ${REGISTRY_NAME}
+      docker login ${REGISTRY_NAME} -u ${REGISTRY_USER} -p ${REGISTRY_PASS}
+  - type: Command
+    name: "Docker build"
+    command: |
+      echo "Running multistage build with build cache to build the app, generate a native executable and package it in a runtime image."
+      export DOCKER_BUILDKIT=1
+      export DOCKER_CLI_EXPERIMENTAL=enabled
+      docker buildx create --use
+      docker buildx build \
+              --cache-from=type=local,src=./cache \
+              --cache-to=type=local,dest=./cache \
+              --load \
+              -f ./Dockerfiles/multistage/Dockerfile.gvmee-ni-cache \
+              --build-arg APP_FILE=${APP_FILE} \
+              -t ${TAG} .
+      echo "DONE"
+      printf "List of docker images:\n $(docker images)"  
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          build_result=FAILURE
+          echo "Failure successfully handled"
+  - type: Command
+    name: "Build Cache Upload"
+    timeoutInSeconds: 140
+    command: |
+      rm ${BUILD_CACHE_OS_FILE_NAME} && zip -r ${BUILD_CACHE_OS_FILE_NAME} cache/*
+      oci os object put --bucket-name build-cache --file ${BUILD_CACHE_OS_FILE_NAME} --force
+outputArtifacts:
+  - name: Build_output_image
+    type: DOCKER_IMAGE
+    # this is only the locally exported container image name
+    # this location tag doesn't effect the tag used to deliver the container image
+    # to the Container Registry.
+    location: ${TAG}
