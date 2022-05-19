@@ -56,7 +56,7 @@ public class Jabberwocky {
             b.append(lines[i]);
             b.append("<br/>\n");
         }
-        System.out.println(b.toString());
+        System.out.println("b.toString():: " + b.toString());
         return b.toString();
     }
 
