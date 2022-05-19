@@ -50,7 +50,7 @@ COPY src src
 COPY pom.xml pom.xml
 
 # Run maven package with build cache (mount) in this directory to build the app JAR file and generate the app native executable
-RUN --mount=type=cache,target=/root/.m2 mvn --no-transfer-progress clean package -DskipTests -Pnative
+RUN --mount=type=cache,target=/root/.m2 mvn clean package -DskipTests -Pnative
 
 #
 # Final stage: Create a runtime image from any Linux container image with glibc
