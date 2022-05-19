@@ -7,7 +7,8 @@ env:
   variables:
     TAG: "jibber-ni-gvmee22-jdk17:0.0.1"
     APP_FILE: "jibber"
-    # Build cache. Credits: https://github.com/ashok-cm/oci-devops-build-caching
+    ### Build cache: 
+    ### Credits: https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-build-caching
     BUILD_CACHE_OS_BUCKET_NAME: build-cache
     BUILD_CACHE_OS_FILE_NAME: jibber-cache.zip
     BUILDX_VERSION: 0.8.2
@@ -32,7 +33,7 @@ steps:
       export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
       echo "BUILDRUN_HASH: " $BUILDRUN_HASH
   - type: Command
-    name: "Pre-build environment checks"
+    name: "Pre-build checks"
     command: |
       echo "Current dir: $(pwd)"
       echo "Current dir contents: $(ls -alh)"
@@ -72,8 +73,6 @@ steps:
               -f ./Dockerfiles/multistage/Dockerfile.gvmee-ni-cache \
               --build-arg APP_FILE=${APP_FILE} \
               -t ${TAG} .
-      echo "DONE"
-      printf "List of docker images:\n $(docker images)"  
     onFailure:
       - type: Command
         command: |
@@ -86,6 +85,10 @@ steps:
     command: |
       rm ${BUILD_CACHE_OS_FILE_NAME} && zip -r ${BUILD_CACHE_OS_FILE_NAME} cache/*
       oci os object put --bucket-name build-cache --file ${BUILD_CACHE_OS_FILE_NAME} --force
+  - type: Command
+    name: "Post-build checks"
+    command: |
+      printf "List of docker images:\n $(docker images)"  
 outputArtifacts:
   - name: Build_output_image
     type: DOCKER_IMAGE
