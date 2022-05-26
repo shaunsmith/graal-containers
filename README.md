@@ -21,7 +21,7 @@ feat it uses a Markov chain to model the text of the original poem and this mode
 3. App JAR
     | GraalVM Enterprise | GraalVM Community |
     | --------------- | --------------- |
-    | [Build app JAR](./docs/03.md) | -- |
+    | [Build app JAR](./docs/03-ee.md) | [Build app JAR](./docs/03-ce.md) |
 
 4. [Clean up](./docs/04.md)
 5. OCI DevOps

@@ -11,10 +11,10 @@ services:
 #   ### OCI DevOps Build Pipelines
 #   ### Don't forget to replace the tag after running the build pipeline
 #     # image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-jar-gvmee2130-jdk17:qdxasw6
-#     image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-jar-gvmee22-jdk17:aczp6sr
+#     # image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-jar-gvmee22-jdk17:aczp6sr
 #   ### Local machine
 #     # image: jibber-jar-gvmee2130-jdk17:0.0.1
-#     # image: jibber-jar-gvmee22-jdk17:0.0.1
+#     image: jibber-jar-gvmee22-jdk17:0.0.1
 # #    restart: always
 #     mem_limit: 512m
 #     memswap_limit: 512m
@@ -22,6 +22,29 @@ services:
 #     cpu_percent: 100
 #     cpus: 4
 #     container_name: jibber-jar-gvmee-jdk17
+#     command:
+#       - "-jar"
+#       - "app.jar"
+#       - '-Xms64m'
+#       - '-Xmx64m'
+#     # depends_on:
+#     #   - "prom"
+#     ports:
+#       - "8080:8080"
+
+#   jibber-jar-gvmce-jdk17:
+#   ### OCI DevOps Build Pipelines
+#   ### Don't forget to replace the tag after running the build pipeline
+#     # image: phx.ocir.io/oracledeveloper/ssp-gvm/jibber-jar-gvmce22-jdk17:aczp6sr
+#   ### Local machine
+#     image: jibber-jar-gvmce22-jdk17:0.0.1
+# #    restart: always
+#     mem_limit: 512m
+#     memswap_limit: 512m
+#     cpu_count: 4
+#     cpu_percent: 100
+#     cpus: 4
+#     container_name: jibber-jar-gvmce-jdk17
 #     command:
 #       - "-jar"
 #       - "app.jar"
